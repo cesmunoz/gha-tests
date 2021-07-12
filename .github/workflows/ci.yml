@@ -1,0 +1,26 @@
+name: Deploy or Rollback
+
+on: 
+  workflow_dispatch:
+    inputs:
+      logLevel:
+        description: 'Log level'     
+        required: true
+        default: 'warning'
+      tags:
+        description: 'Test scenario tags'  
+
+jobs:
+  DeployRelease:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v4
+        id: set-result
+        with:
+          script: return "Hello!"
+          result-encoding: string
+      - name: Get result
+        run: echo "${{steps.set-result.outputs.result}}"
+      - run: |
+        echo "Log level: ${{ github.event.inputs.logLevel }}"
+        echo "Tags: ${{ github.event.inputs.tags }}" 
