@@ -25,3 +25,8 @@ jobs:
         uses: actions/github-script@v4
         with:
           script: console.log(context)
+      - uses: actions/github-script@v4
+        with:
+          script: |
+            const result = await github.repos.addLabels()
+            console.log(result)
