@@ -28,5 +28,8 @@ jobs:
       - uses: actions/github-script@v4
         with:
           script: |
-            const result = await github.repos.getLatestRelease()
+            const result = await github.repos.getLatestRelease({
+              owner: context.repo.owner,,
+              repo: context.repo.repo,
+            })
             console.log(result)
