@@ -32,4 +32,4 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
             })
-            console.log(result)
+            console.log('Last Tag' result.data.tag_name)
