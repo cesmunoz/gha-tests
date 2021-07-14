@@ -31,6 +31,8 @@ jobs:
               latest, 
               previous,
             }
+      - name: Get result
+        run: echo "${{steps.tags.outputs.latest.tag_name}}"
       - uses: actions/checkout@v2
         name: Checkout
         with: 
