@@ -1,3 +1,3 @@
 # gha-tests
 
-This repo if for testing github actions
+This repository if for testing github actions
