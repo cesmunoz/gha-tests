@@ -22,25 +22,23 @@ jobs:
       - name: Get result
         run: echo "${{steps.set-result.outputs.result}}"
       - uses: actions/github-script@v4
-        id: latest
+        id: tags
         with:
           script: |
-            const result = await github.repos.getLatestRelease({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-            })
-            console.log('Last Tag', result.data.tag_name)
-      - uses: actions/github-script@v4
-        id: previous
-        with:
-          script: |
-            const result = await github.repos.listReleases({
+            const [latest, previous] = await github.repos.listReleases({
               owner: context.repo.owner,
               repo: context.repo.repo,
               per_page: 2,
             })
-            console.log('Previous Tag', result.data)
+
+            console.log('Latest Tag', latest)
+            console.log('Previous Tag', previous)
+
+            return { 
+              latest, 
+              previous,
+            }
       - uses: actions/checkout@v2
         name: 
         with: 
-          ref: ${{ steps.latest.outputs.tag_name }}
+          ref: ${{ steps.tags.outputs.latest }}
