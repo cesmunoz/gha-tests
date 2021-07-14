@@ -37,8 +37,9 @@ jobs:
             const result = await github.repos.listReleases({
               owner: context.repo.owner,
               repo: context.repo.repo,
+              per_page: 2,
             })
-            console.log('Previous Tag', result.data)
+            console.log('Previous Tag', result.data[1].tag_name)
       - uses: actions/checkout@v2
         name: 
         with: 
