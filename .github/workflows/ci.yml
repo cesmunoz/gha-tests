@@ -1,5 +1,7 @@
 name: CI
-on: workflow_dispatch  
+on: 
+  release:
+    types: [published, deleted]
 
 jobs:
   DeployRelease:
