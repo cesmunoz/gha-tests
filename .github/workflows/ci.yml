@@ -23,7 +23,7 @@ jobs:
               repo: context.repo.repo,
               per_page: 2,
             })
-            console.log(reponse.data)
+            console.log(response.data)
             const [latest, previous] = response.data
             console.log('Previous Tag', previous.tag_name)
             console.log('Latest Tag', latest.tag_name) 
