@@ -38,7 +38,7 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
             })
-            console.log('Previous Tag', result.data.tag_name)
+            console.log('Previous Tag', result.data)
       - uses: actions/checkout@v2
         name: 
         with: 
