@@ -22,13 +22,13 @@ jobs:
               per_page: 2,
             })
             const [latest, previous] = response.data
-            console.log('Previous Tag', previous)
-            console.log('Latest Tag', latest)
+            console.log('Previous Tag', previous.tag_name)
+            console.log('Latest Tag', latest.tag_name) 
             return { 
               latest, 
               previous,
             }
       - uses: actions/checkout@v2
-        name: 
+        name: Checkout
         with: 
-          ref: ${{ steps.tags.outputs.latest }}
+          ref: ${{ steps.tags.outputs.latest.tag_name }}
