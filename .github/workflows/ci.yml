@@ -39,7 +39,7 @@ jobs:
               repo: context.repo.repo,
               per_page: 2,
             })
-            console.log('Previous Tag', result.data[1].tag_name)
+            console.log('Previous Tag', result.data)
       - uses: actions/checkout@v2
         name: 
         with: 
