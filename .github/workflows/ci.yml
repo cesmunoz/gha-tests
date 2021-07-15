@@ -30,7 +30,7 @@ jobs:
             }
             console.log('Output', output)
             return output
-      - name: Get result
+      - name: Get Tags Results
         run: echo "${{steps.tags}}"
       - uses: actions/checkout@v2
         name: Checkout
