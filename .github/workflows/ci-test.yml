@@ -17,6 +17,8 @@ jobs:
               latest: response.data[0], 
               ...(response.data[1] && { previous: response.data[1] }),
             }
+            
+            console.log("Output", reponse.data)
             return output
       - name: Get Tags Results
         run: echo "${{steps.tags.outputs.result.latest.tag_name}}"
