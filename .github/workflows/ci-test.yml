@@ -5,7 +5,7 @@ jobs:
   DeployRelease:
     runs-on: ubuntu-latest
     outputs:
-      latest-tag: ${{ steps.gettingtags.outputs.latests }}
+      latest-tag: ${{ steps.gettingtags.outputs }}
     #  previous-tag: ${{ steps.gettingtags.outputs.previous }}
     steps:
       - uses: actions/github-script@v4
