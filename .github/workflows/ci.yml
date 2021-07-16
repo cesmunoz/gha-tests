@@ -21,14 +21,9 @@ jobs:
               ...(response.data[1] && { previous: response.data[1] }),
             }
             return output
-      - uses: actions/github-script@v4
-        id: tags
-        with:
-          script: |
-            console.log(steps.tags.outputs.result)
       - name: Get Tags Results
         run: echo "${{steps.tags.outputs.result.latest.tag_name}}"
-      # - uses: actions/checkout@v2
-      #   name: Checkout
-      #   with: 
-      #     ref: ${{ steps.tags.outputs.latest.tag_name }}
+      - uses: actions/checkout@v2
+        name: Checkout
+        with: 
+          ref: ${{ steps.tags.outputs.latest.tag_name }}
