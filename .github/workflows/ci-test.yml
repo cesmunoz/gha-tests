@@ -32,7 +32,7 @@ jobs:
           LATEST=$TAGS | jq '.latest'c
           echo $LATEST
           echo "?"
-          echo "${{steps.gettingtags.outputs.result}}" | jq '.latest'
+          echo "${{fromJson(steps.gettingtags.outputs.result).latest}}"
           echo "??"
           echo "==="
           PREVIOUS=$TAGS | jq '.previous'
