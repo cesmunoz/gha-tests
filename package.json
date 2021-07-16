@@ -1,6 +1,6 @@
 {
   "name": "gha-tests",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "This is a workflow test",
   "main": "index.js",
   "scripts": {
