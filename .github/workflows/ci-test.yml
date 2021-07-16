@@ -9,13 +9,16 @@ jobs:
 #    #  previous-tag: ${{ steps.gettingtags.outputs.previous }}
     steps:
       - uses: actions/github-script@v4
-        id: set-result
+        id: gettingtags
         with:
           script: |
-            return "Cesar"
-          result-encoding: string
+            return {
+              a: 1,
+              b: 2
+            }
+          result-encoding: json
       - name: Get result
-        run: echo "${{steps.set-result.outputs.result}}"
+        run: echo "${{steps.gettingtags.outputs.result}}"
 
 #      - uses: actions/github-script@v4
 #        id: gettingtags
