@@ -1,0 +1,1 @@
+echo "::set-output name=releasetag::$(curl -s https://api.github.com/repos/cesmunoz/gha-test/releases/latest  | jq '.tag_name' | sed 's/\"//g')"

@@ -1,28 +1,28 @@
-name: CI
-on: #push
-  release:
-    types: [published, deleted]
+# name: CI
+# on: #push
+#   release:
+#     types: [published, deleted]
 
-jobs:
-  DeployRelease:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/github-script@v4
-        id: tags
-        with:
-          script: |
-            const response = await github.repos.latests({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-            })
-            const output = { 
-              latest: response.data[0], 
-              ...(response.data[1] && { previous: response.data[1] }),
-            }
-            return output
-      - name: Get Tags Results
-        run: echo "${{steps.tags.outputs.result.latest.tag_name}}"
-      - uses: actions/checkout@v2
-        name: Checkout
-        with: 
-          ref: ${{ steps.tags.outputs.latest.tag_name }}
+# jobs:
+#   DeployRelease:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/github-script@v4
+#         id: tags
+#         with:
+#           script: |
+#             const response = await github.repos.latests({
+#               owner: context.repo.owner,
+#               repo: context.repo.repo,
+#             })
+#             const output = { 
+#               latest: response.data[0], 
+#               ...(response.data[1] && { previous: response.data[1] }),
+#             }
+#             return output
+#       - name: Get Tags Results
+#         run: echo "${{steps.tags.outputs.result.latest.tag_name}}"
+#       - uses: actions/checkout@v2
+#         name: Checkout
+#         with: 
+#           ref: ${{ steps.tags.outputs.latest.tag_name }}
