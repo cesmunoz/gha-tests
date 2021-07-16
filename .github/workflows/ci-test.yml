@@ -26,6 +26,9 @@ jobs:
         run: |          
           echo "${{steps.gettingtags.outputs.result}}"
           TAGS="${{steps.gettingtags.outputs.result}}"
+          echo "==="
+          echo $TAGS
+          echo "==="
           LATEST=$TAGS | jq '.latest'
           PREVIOUS=$TAGS | jq '.previous'
           echo $LATEST
