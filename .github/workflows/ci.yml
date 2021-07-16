@@ -16,15 +16,13 @@ jobs:
               repo: context.repo.repo,
               per_page: 2,
             })
-            console.log(response.data)
             const output = { 
               latest: response.data[0], 
               ...(response.data[1] && { previous: response.data[1] }),
             }
-            console.log('Output', output)
             return output
       - name: Get Tags Results
-        run: echo "${{steps.tags.outputs.result.latest.tag_name}}"
+        run: echo "${{steps.tags.outputs.latest.tag_name}}"
       # - uses: actions/checkout@v2
       #   name: Checkout
       #   with: 
