@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/github-script@v4
-        id: tags
+        id: gettingtags
         with:
           script: |
             return await github.repos.listReleases({
@@ -22,7 +22,7 @@ jobs:
             return output
           result-encoding: json
       - name: Get Tags Results
-        run: echo "${{fromJson(needs.tags.outputs[0].tag_name)}}" # "${{ steps.tags.outputs.result[0].tag_name }}"
+        run: echo "${{ steps.gettingtags.outputs.response }}"
       - uses: actions/checkout@v2
         name: Checkout
         with: 
