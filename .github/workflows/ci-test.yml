@@ -4,9 +4,6 @@ on: workflow_dispatch
 jobs:
   DeployRelease:
     runs-on: ubuntu-latest
-#    outputs:
-#      latest-tag: ${{ steps.gettingtags.outputs.result }}
-#    #  previous-tag: ${{ steps.gettingtags.outputs.previous }}
     steps:
       - uses: actions/github-script@v4
         id: gettingtags
@@ -24,8 +21,23 @@ jobs:
             }
             return result
           result-encoding: json
-      - name: Get result
-        run: echo "${{steps.gettingtags.outputs.result.latest}}"
+      - name: Tag Result
+        id: tags
+        run: |          
+          echo "${{steps.gettingtags.outputs.result}}"
+          TAGS="${{steps.gettingtags.outputs.result}}"
+          LATEST=$TAGS | jq '.latest'
+          PREVIOUS=$TAGS | jq '.previous'
+          echo $LATEST
+          echo $PREVOUS
+          echo '::set-output name=LATEST::$LATEST'
+          echo '::set-output name=PREVIOUS::$PREVIOUS'
+      - name: Print Tags
+        id: printtags
+        run: |
+          echo "The Latest Tag is: ${{ steps.tags.outputs.LATEST }}"
+          echo "The Previous Tag is: ${{ steps.tags.outputs.PREVIOUS }}"
+
 #      - uses: actions/checkout@v2
 #        name: Checkout
 #        with: 
