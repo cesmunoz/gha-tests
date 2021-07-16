@@ -22,7 +22,7 @@ jobs:
             return output
           result-encoding: json
       - name: Get Tags Results
-        run: echo "${{steps.tags.outputs}}" | jq
+        run: echo "${{steps.tags.outputs.result.latest.tag_name}}" | jq
       - uses: actions/checkout@v2
         name: Checkout
         with: 
