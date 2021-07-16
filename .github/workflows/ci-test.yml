@@ -30,9 +30,11 @@ jobs:
           echo $TAGS
           echo "==="
           LATEST=$TAGS | jq '.latest'
-          PREVIOUS=$TAGS | jq '.previous'
           echo $LATEST
+          echo "==="
+          PREVIOUS=$TAGS | jq '.previous'
           echo $PREVOUS
+          echo "==="
           echo '::set-output name=LATEST::$LATEST'
           echo '::set-output name=PREVIOUS::$PREVIOUS'
       - name: Print Tags
