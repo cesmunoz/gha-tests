@@ -1,7 +1,7 @@
 name: CI
-on: push
-  # release:
-  #   types: [published, deleted]
+on: #push
+  release:
+    types: [published, deleted]
 
 jobs:
   DeployRelease:
