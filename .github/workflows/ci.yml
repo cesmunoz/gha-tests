@@ -1,19 +1,12 @@
 name: CI
-on: 
-  release:
-    types: [published, deleted]
+on: push
+  # release:
+  #   types: [published, deleted]
 
 jobs:
   DeployRelease:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/github-script@v4
-        id: set-result
-        with:
-          script: return "Hello!"
-          result-encoding: string
-      - name: Get result
-        run: echo "${{steps.set-result.outputs.result}}"
       - uses: actions/github-script@v4
         id: tags
         with:
@@ -32,7 +25,7 @@ jobs:
             return output
       - name: Get Tags Results
         run: echo "${{steps.tags.outputs.result.latest.tag_name}}"
-      - uses: actions/checkout@v2
-        name: Checkout
-        with: 
-          ref: ${{ steps.tags.outputs.latest.tag_name }}
+      # - uses: actions/checkout@v2
+      #   name: Checkout
+      #   with: 
+      #     ref: ${{ steps.tags.outputs.latest.tag_name }}
