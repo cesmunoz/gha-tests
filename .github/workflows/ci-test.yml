@@ -21,7 +21,7 @@ jobs:
             console.log("Output", response.data)
             return output
       - name: Get Tags Results
-        run: echo "${{steps.tags.outputs}}" | jq '.'
+        run: echo "${{steps.tags.outputs}}" | jq
       - uses: actions/checkout@v2
         name: Checkout
         with: 
