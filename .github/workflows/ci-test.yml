@@ -19,13 +19,13 @@ jobs:
               latest: response.data[0].tag_name,
                ...(response.data[1] && { previous: response.data[1].tag_name }),
             }
+
+            console.log("The Latest Tag is:", result.latest)
+            if(result.previous) {
+              console.log("The Previous Tag is:", result.previous)
+            }
             return result
           result-encoding: json
-      - name: Print Tags
-        id: printtags
-        run: |
-          echo "The Latest Tag is: "${{fromJson(steps.gettingtags.outputs.result).latest}}"
-          echo "The Previous Tag is: "${{fromJson(steps.gettingtags.outputs.result).previous}}"
       - uses: actions/checkout@v2
         name: Checkout
         with: 
