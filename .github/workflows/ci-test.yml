@@ -16,7 +16,9 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
             })
-            result-encoding: string
+            console.log(response.data)
+            return reponse.data.tag_name
+          result-encoding: string
       - name: Get Tags Results
         run: echo "${{ needs.DeployRelease.outputs.latest-tag }}"
       # - uses: actions/checkout@v2
