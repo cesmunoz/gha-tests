@@ -12,21 +12,24 @@ jobs:
         id: gettingtags
         with:
           script: |
-            const response = await github.repos.listReleases({
+            const response = await github.repos.getLatestRelease({
               owner: context.repo.owner,
               repo: context.repo.repo,
             })
-            const output = { 
-              latest: response.data[0].tag_name, 
-              ...(response.data[1] && { previous: response.data[1].tag_name }),
-            }
-            
-            console.log("Output", output)
-            return output
-          result-encoding: json
+            return response.data.tag_name
       - name: Get Tags Results
         run: echo "${{ needs.DeployRelease.outputs.latest-tag }}"
       - uses: actions/checkout@v2
         name: Checkout
         with: 
           ref: ${{ needs.DeployRelease.outputs.latest-tag }}
+
+
+          #  const response = await github.repos.listRelegetLatestReleaseases({
+          #     owner: context.repo.owner,
+          #     repo: context.repo.repo,
+          #   })
+          #   const output = { 
+          #     latest: response.data[0].tag_name, 
+          #     ...(response.data[1] && { previous: response.data[1].tag_name }),
+          #   }
