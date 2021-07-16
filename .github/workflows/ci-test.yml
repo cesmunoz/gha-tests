@@ -11,7 +11,8 @@ jobs:
       - uses: actions/github-script@v4
         id: set-result
         with:
-          script: return "Hello!"
+          script: |
+            return "Cesar"
           result-encoding: string
       - name: Get result
         run: echo "${{steps.set-result.outputs.result}}"
