@@ -21,33 +21,21 @@ jobs:
             }
             return result
           result-encoding: json
-      - name: Tag Result
-        id: tags
-        run: |          
-          echo "${{steps.gettingtags.outputs.result}}"
-          TAGS="${{steps.gettingtags.outputs.result}}"
-          echo "==="
-          echo $TAGS
-          echo "==="
-          LATEST=$TAGS | jq '.latest'c
-          echo $LATEST
-          echo "?"
-          echo "${{fromJson(steps.gettingtags.outputs.result).latest}}"
-          echo "??"
-          echo "==="
-          PREVIOUS=$TAGS | jq '.previous'
-          echo $PREVOUS
-          echo "==="
-          echo '::set-output name=LATEST::$LATEST'
-          echo '::set-output name=PREVIOUS::$PREVIOUS'
       - name: Print Tags
         id: printtags
         run: |
-          echo "The Latest Tag is: ${{ steps.tags.outputs.LATEST }}"
-          echo "The Previous Tag is: ${{ steps.tags.outputs.PREVIOUS }}"
+          echo "The Latest Tag is: "${{fromJson(steps.gettingtags.outputs.result).latest}}"
+          echo "The Previous Tag is: "${{fromJson(steps.gettingtags.outputs.result).previous}}"
+      - uses: actions/checkout@v2
+        name: Checkout
+        with: 
+          ref: "${{fromJson(steps.gettingtags.outputs.result).latest}}"
+      - name: Deploy
+        run: |
+          LATEST="${{fromJson(steps.gettingtags.outputs.result).latest}}"
+          PREVIOUS="${{fromJson(steps.gettingtags.outputs.result).previous}}"
+          SERVICES=`git diff --name-only $LATEST $PREVIOUS | cut -f1,2 -d'/' | sort | uniq | grep "services\w*" | cut -f2 -d '/'
+          echo "Enviroment prod"
+          echo "The following services will be deployed: $SERVICES"
 
-#      - uses: actions/checkout@v2
-#        name: Checkout
-#        with: 
-#          ref: ${{ steps.gettingtags.outputs.result }}
 
