@@ -5,7 +5,7 @@ jobs:
   DeployRelease:
     runs-on: ubuntu-latest
     outputs:
-      latest-tag: ${{ steps.gettingtags.outputs }}
+      latest-tag: ${{ steps.gettingtags.outputs.result }}
     #  previous-tag: ${{ steps.gettingtags.outputs.previous }}
     steps:
       - uses: actions/github-script@v4
@@ -16,11 +16,11 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
             })
-            console.log(response.data)
+            console.log(response.data.tag_name)
             return response.data.tag_name
           result-encoding: string
       - name: Get Tags Results
-        run: echo "${{ needs.DeployRelease.outputs.latest-tag }}"
+        run: echo "${{ needs.DeployRelease.outputs.result.latest-tag }}"
       # - uses: actions/checkout@v2
       #   name: Checkout
       #   with: 
