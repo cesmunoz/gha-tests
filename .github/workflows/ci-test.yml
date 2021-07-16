@@ -21,7 +21,7 @@ jobs:
               ...(response.data[1] && { previous: response.data[1].tag_name }),
             }
             
-            console.log("Output", response.data)
+            console.log("Output", output)
             return output
           result-encoding: json
       - name: Get Tags Results
