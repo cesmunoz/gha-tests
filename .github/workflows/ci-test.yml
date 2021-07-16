@@ -4,23 +4,31 @@ on: workflow_dispatch
 jobs:
   DeployRelease:
     runs-on: ubuntu-latest
-    outputs:
-      latest-tag: ${{ steps.gettingtags.outputs.result }}
-    #  previous-tag: ${{ steps.gettingtags.outputs.previous }}
+#    outputs:
+#      latest-tag: ${{ steps.gettingtags.outputs.result }}
+#    #  previous-tag: ${{ steps.gettingtags.outputs.previous }}
     steps:
       - uses: actions/github-script@v4
-        id: gettingtags
+        id: set-result
         with:
-          script: |
-            const response = await github.repos.getLatestRelease({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-            })
-            console.log(response.data.tag_name)
-            return "Hello!"
+          script: return "Hello!"
           result-encoding: string
-      - name: Get Tags Results
-        run: echo "${{ needs.DeployRelease.outputs.result.latest-tag }}"
+      - name: Get result
+        run: echo "${{steps.set-result.outputs.result}}"
+
+#      - uses: actions/github-script@v4
+#        id: gettingtags
+#        with:
+#          script: |
+#            const response = await github.repos.getLatestRelease({
+#             owner: context.repo.owner,
+#              repo: context.repo.repo,
+#            })
+#            console.log(response.data.tag_name)
+#            return "Hello!"
+#          result-encoding: string
+#      - name: Get Tags Results
+#        run: echo "${{ needs.DeployRelease.outputs.result.latest-tag }}"
       # - uses: actions/checkout@v2
       #   name: Checkout
       #   with: 
