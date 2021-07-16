@@ -11,10 +11,9 @@ jobs:
         id: tags
         with:
           script: |
-            const response = await github.repos.listReleases({
+            const response = await github.repos.latests({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              per_page: 2,
             })
             const output = { 
               latest: response.data[0], 
