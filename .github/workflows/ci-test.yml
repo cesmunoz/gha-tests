@@ -17,7 +17,7 @@ jobs:
               repo: context.repo.repo,
             })
             console.log(response.data)
-            return reponse.data.tag_name
+            return response.data.tag_name
           result-encoding: string
       - name: Get Tags Results
         run: echo "${{ needs.DeployRelease.outputs.latest-tag }}"
