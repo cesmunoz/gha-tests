@@ -25,32 +25,9 @@ jobs:
             return result
           result-encoding: json
       - name: Get result
-        run: echo "${{steps.gettingtags.outputs.result}}"
+        run: echo "${{steps.gettingtags.outputs.result.latest}}"
+#      - uses: actions/checkout@v2
+#        name: Checkout
+#        with: 
+#          ref: ${{ steps.gettingtags.outputs.result }}
 
-#      - uses: actions/github-script@v4
-#        id: gettingtags
-#        with:
-#          script: |
-#            const response = await github.repos.getLatestRelease({
-#             owner: context.repo.owner,
-#              repo: context.repo.repo,
-#            })
-#            console.log(response.data.tag_name)
-#            return "Hello!"
-#          result-encoding: string
-#      - name: Get Tags Results
-#        run: echo "${{ needs.DeployRelease.outputs.result.latest-tag }}"
-      # - uses: actions/checkout@v2
-      #   name: Checkout
-      #   with: 
-      #     ref: ${{ needs.DeployRelease.outputs.latest-tag }}
-
-
-          #  const response = await github.repos.listRelegetLatestReleaseases({
-          #     owner: context.repo.owner,
-          #     repo: context.repo.repo,
-          #   })
-          #   const output = { 
-          #     latest: response.data[0].tag_name, 
-          #     ...(response.data[1] && { previous: response.data[1].tag_name }),
-          #   }
