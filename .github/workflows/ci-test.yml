@@ -19,7 +19,7 @@ jobs:
             })
             
             const result = {
-              latest: reponse.data[0].tag_name,
+              latest: response.data[0].tag_name,
                ...(response.data[1] && { previous: response.data[1].tag_name }),
             }
             return result
