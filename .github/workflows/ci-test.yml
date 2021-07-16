@@ -30,9 +30,10 @@ jobs:
         name: Checkout
         with: 
           ref: "${{fromJson(steps.gettingtags.outputs.result).latest}}"
+      - name: Fetching tags
+        run: git fetch --all --tags           
       - name: Deploy
         run: |
-          git fetch --all --tags          
           LATEST="${{fromJson(steps.gettingtags.outputs.result).latest}}"
           PREVIOUS="${{fromJson(steps.gettingtags.outputs.result).previous}}"
           SERVICES=`git diff --name-only $LATEST $PREVIOUS | cut -f1,2 -d'/' | sort | uniq | grep "services\w*" | cut -f2 -d '/'`
