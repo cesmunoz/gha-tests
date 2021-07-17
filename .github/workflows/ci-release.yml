@@ -1,7 +1,5 @@
-name: CI-TEST-RELEASE
-on: 
-  release:
-    types: [published, deleted]
+name: CI-TEST
+on: [published, deleted]
 
 jobs:
   DeployRelease:
@@ -10,3 +8,8 @@ jobs:
       - name: Print GitHub event action
         run: |
           echo "${{ github.ref }}"
+          echo "${{ github.event }}"
+          echo "${{ github.event_name }}"
+          echo "${{ github.action }}"
+
+
