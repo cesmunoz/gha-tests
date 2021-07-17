@@ -13,5 +13,6 @@ jobs:
           echo "${{ github.event }}"
           echo "${{ github.event_name }}"
           echo "${{ github.action }}"
+          echo "${{ github.event.action }}"
 
 
