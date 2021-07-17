@@ -1,4 +1,4 @@
-name: CI-TEST
+name: CI-TEST-RELEASE
 on: 
   release:
     types: [published, deleted]

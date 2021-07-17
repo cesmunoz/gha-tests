@@ -1,4 +1,4 @@
-name: CI-TEST
+name: CI-TEST-DISPATCH
 on: workflow_dispatch # [published, deleted]
 
 jobs:
