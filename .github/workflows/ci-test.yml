@@ -1,4 +1,4 @@
-name: CI-TEST-RELEASE
+name: CI-RELEASE
 #on: workflow_dispatch 
 on: 
   release:
