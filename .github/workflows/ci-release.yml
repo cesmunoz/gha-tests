@@ -9,4 +9,4 @@ jobs:
     steps:
       - name: Print GitHub event action
         run: |
-          echo "${{ fromJson(github.event) }}"
+          echo "${{ github.ref }}"
