@@ -1,5 +1,5 @@
 name: CI-TEST-DISPATCH
-on: workflow_dispath
+on: workflow_dispatch
 #   release:
 #     types: [published, deleted]
 
