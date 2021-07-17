@@ -1,5 +1,8 @@
 name: CI-TEST-DISPATCH
-on: workflow_dispatch # [published, deleted]
+#on: workflow_dispatch 
+on: 
+  release:
+    types: [published, deleted]
 
 jobs:
   DeployRelease:
@@ -9,34 +12,34 @@ jobs:
         id: gettingtags
         with:
           script: |
-            const response = await github.repos.listReleases({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              per_page: 2
+            const action = "${{ github.event.action }}"
+
+            const { data: releases } = await github.repos.listReleases({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                per_page: 2
             })
-            
+
             const result = {
-              latest: response.data[0].tag_name,
-               ...(response.data[1] && { previous: response.data[1].tag_name }),
+              ref: releases[0].tag_name,
+              tag1: releases[0].tag_name,
+              tag2: action === 'deleted' ? "${{ github.ref }}" : (release[1] ? releases[1].tag_name : releases[0].tag_name)
             }
 
-            console.log("The Latest Tag is:", result.latest)
-            if(result.previous) {
-              console.log("The Previous Tag is:", result.previous)
-            }
+            console.log("Output:", result);            
             return result
           result-encoding: json
       - uses: actions/checkout@v2
         name: Checkout
         with: 
-          ref: "${{fromJson(steps.gettingtags.outputs.result).latest}}"
+          ref: "${{fromJson(steps.gettingtags.outputs.result).ref}}"
       - name: Fetching tags
         run: git fetch --all --tags           
       - name: Deploy
         run: |
-          LATEST="${{fromJson(steps.gettingtags.outputs.result).latest}}"
-          PREVIOUS="${{fromJson(steps.gettingtags.outputs.result).previous}}"
-          SERVICES=`git diff --name-only $LATEST $PREVIOUS | cut -f1,2 -d'/' | sort | uniq | grep "services\w*" | cut -f2 -d '/'`
+          TAG1="${{fromJson(steps.gettingtags.outputs.result).tag1}}"
+          TAG2="${{fromJson(steps.gettingtags.outputs.result).tag2}}"
+          SERVICES=`git diff --name-only $TAG1 $TAG2 | cut -f1,2 -d'/' | sort | uniq | grep "services\w*" | cut -f2 -d '/'`
           echo "Enviroment prod"
           echo "The following services will be deployed: $SERVICES"
 

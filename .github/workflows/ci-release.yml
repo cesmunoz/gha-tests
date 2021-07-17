@@ -1,18 +1,18 @@
-name: CI-TEST
-on: 
-  release:
-    types: [published, deleted]
+# name: CI-TEST
+# on: 
+#   release:
+#     types: [published, deleted]
 
-jobs:
-  DeployRelease:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Print GitHub event action
-        run: |
-          echo "${{ github.ref }}"
-          echo "${{ github.event }}"
-          echo "${{ github.event_name }}"
-          echo "${{ github.action }}"
-          echo "${{ github.event.action }}"
+# jobs:
+#   DeployRelease:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Print GitHub event action
+#         run: |
+#           echo "${{ github.ref }}"
+#           echo "${{ github.event }}"
+#           echo "${{ github.event_name }}"
+#           echo "${{ github.action }}"
+#           echo "${{ github.event.action }}"
 
 
