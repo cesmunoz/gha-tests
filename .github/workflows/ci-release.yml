@@ -23,7 +23,7 @@ jobs:
             const result = {
               ref: releases[0].tag_name,
               tag1: releases[0].tag_name,
-              tag2: action === 'deleted' ? "${{ github.ref }}" : (release[1] ? releases[1].tag_name : releases[0].tag_name)
+              tag2: action === 'deleted' ? "${{ github.ref }}" : (releases[1] ? releases[1].tag_name : releases[0].tag_name)
             }
 
             console.log("Output:", result);            
