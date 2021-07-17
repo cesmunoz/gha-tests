@@ -1,5 +1,7 @@
 name: CI-TEST
-on: [published, deleted]
+on: 
+  release:
+    types: [published, deleted]
 
 jobs:
   DeployRelease:
