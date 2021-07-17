@@ -1,5 +1,5 @@
 name: CI-TEST
-on: workflow_dispatch
+on: workflow_dispatch # [published, deleted]
 
 jobs:
   DeployRelease:

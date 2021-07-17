@@ -1,0 +1,10 @@
+name: CI-TEST
+on: [published, deleted]
+
+jobs:
+  DeployRelease:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print GitHub event action
+        run: |
+          echo "${{ github.event }}"
